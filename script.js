@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initContactRobot();
   initSecretHint();
   initBonusRules();
-  initScrollAnimations();
   
   // Проверка, открыта ли секция правил
   if (window.location.hash === '#bonus-rules') {
@@ -191,10 +190,6 @@ function validateBonus(e) {
     alert('Скидка 30% доступна только при заказе от 3 000 ₽.\nВыберите дополнительные услуги или увеличьте объем проекта.');
     return false;
   }
-  
-  // Здесь можно добавить отправку формы на сервер
-  // e.preventDefault();
-  // sendFormData();
 }
 
 // 4. Секретный режим
@@ -283,40 +278,16 @@ function activateSecretMode() {
       activateBtn.disabled = true;
     };
   }
-  
-  // Добавляем обработчик для кнопки закрыть
-  const closeBtn = bonusContainer.querySelector('.close-secret-bonus');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      bonusContainer.style.display = 'none';
-    });
-  }
 }
 
 // 5. Контактный робот
-// Фикс инициализации контактного робота
 function initContactRobot() {
   const contactToggle = document.querySelector('.contact-toggle');
   const contactRobot = document.getElementById('contact-robot');
-  
   if (!contactToggle || !contactRobot) return;
   
   contactToggle.addEventListener('click', function() {
-    contactRobot.style.display = 'block';
-    contactRobot.style.opacity = '0';
-    contactRobot.style.transform = 'scale(0.8)';
-    
-    setTimeout(() => {
-      contactRobot.style.opacity = '1';
-      contactRobot.style.transform = 'scale(1)';
-    }, 100);
-  });
-  
-  // Добавьте обработчик закрытия
-  document.querySelector('.close-contact-robot').addEventListener('click', function() {
-    contactRobot.style.display = 'none';
-  });
-}
+    const simbot = document.getElementById('simbot');
     
     // Анимация для основного робота
     if (simbot) {
@@ -349,15 +320,6 @@ function initContactRobot() {
   document.querySelector('.close-contact-robot').addEventListener('click', function() {
     closeContactRobot();
   });
-
-// Добавьте следование за курсором
-document.addEventListener('mousemove', (e) => {
-  const contactRobot = document.getElementById('contact-robot');
-  if (contactRobot && contactRobot.style.display === 'block') {
-    contactRobot.style.left = e.clientX + 20 + 'px';
-    contactRobot.style.top = e.clientY + 20 + 'px';
-  }
-});
   
   // Закрытие кликом вне области
   document.addEventListener('click', function(e) {
@@ -439,22 +401,4 @@ function initBonusRules() {
       }
     });
   });
-}
-
-// 8. Анимации при скролле
-function initScrollAnimations() {
-  const animatedElements = document.querySelectorAll('.service-card, .process-step');
-  function checkScroll() {
-    animatedElements.forEach(element => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.3;
-      if (elementPosition < screenPosition) {
-        element.classList.add('visible');
-      }
-    });
-  }
-  
-  // Проверяем при загрузке и при скролле
-  window.addEventListener('load', checkScroll);
-  window.addEventListener('scroll', checkScroll);
 }
