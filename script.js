@@ -294,13 +294,29 @@ function activateSecretMode() {
 }
 
 // 5. Контактный робот
+// Фикс инициализации контактного робота
 function initContactRobot() {
   const contactToggle = document.querySelector('.contact-toggle');
   const contactRobot = document.getElementById('contact-robot');
+  
   if (!contactToggle || !contactRobot) return;
   
   contactToggle.addEventListener('click', function() {
-    const simbot = document.getElementById('simbot');
+    contactRobot.style.display = 'block';
+    contactRobot.style.opacity = '0';
+    contactRobot.style.transform = 'scale(0.8)';
+    
+    setTimeout(() => {
+      contactRobot.style.opacity = '1';
+      contactRobot.style.transform = 'scale(1)';
+    }, 100);
+  });
+  
+  // Добавьте обработчик закрытия
+  document.querySelector('.close-contact-robot').addEventListener('click', function() {
+    contactRobot.style.display = 'none';
+  });
+}
     
     // Анимация для основного робота
     if (simbot) {
@@ -333,6 +349,15 @@ function initContactRobot() {
   document.querySelector('.close-contact-robot').addEventListener('click', function() {
     closeContactRobot();
   });
+
+// Добавьте следование за курсором
+document.addEventListener('mousemove', (e) => {
+  const contactRobot = document.getElementById('contact-robot');
+  if (contactRobot && contactRobot.style.display === 'block') {
+    contactRobot.style.left = e.clientX + 20 + 'px';
+    contactRobot.style.top = e.clientY + 20 + 'px';
+  }
+});
   
   // Закрытие кликом вне области
   document.addEventListener('click', function(e) {
