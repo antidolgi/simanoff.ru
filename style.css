@@ -32,7 +32,7 @@ body {
 /* Градиентная анимация */
 .hero-gradient {
   background: linear-gradient(rgba(74, 108, 247, 0.8), rgba(140, 82, 255, 0.8)), 
-               url('assets/hero-bg.jpg') center/cover no-repeat;
+               url('/assets/hero-bg.jpg') center/cover no-repeat;
   padding: 100px 0;
   position: relative;
 }
