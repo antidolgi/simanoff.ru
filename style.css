@@ -69,8 +69,8 @@ body {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-#simbot:hover {
-  transform: scale(1.2);
+#simbot {
+  pointer-events: auto; /* Для взаимодействия */
 }
 
 .simbot-svg {
@@ -641,12 +641,13 @@ input:focus, select:focus {
   line-height: 1.4;
 }
 
-/* Контактный робот */
+
+/* Исправленное позиционирование контактного робота */
 .contact-robot {
   position: fixed;
-  bottom: 80px;
-  right: 80px;
-  z-index: 99998; /* Ниже основного робота, но выше других элементов */
+  top: 80px; /* Было: bottom: 80px */
+  left: 20px; /* Добавлено */
+  z-index: 9999;
   background: white;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -901,9 +902,8 @@ input:focus, select:focus {
   }
   
   .secret-bonus {
-    width: 95%;
-    padding: 15px;
-  }
+  z-index: 10001 !important;
+}
   
   .service-card, .process-step {
     margin-bottom: 20px;
