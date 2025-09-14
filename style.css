@@ -1,0 +1,911 @@
+/* Основные настройки */
+:root {
+  --primary: #4A6CF7;
+  --secondary: #8C52FF;
+  --accent: #00C9A7;
+  --light: #F8F9FF;
+  --dark: #2D3748;
+  --gray: #718096;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: var(--light);
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Градиентная анимация */
+.hero-gradient {
+  background: linear-gradient(rgba(74, 108, 247, 0.8), rgba(140, 82, 255, 0.8)), 
+               url('assets/hero-bg.jpg') center/cover no-repeat;
+  padding: 100px 0;
+  position: relative;
+}
+
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(-45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Секретный робот */
+#simbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 99999; /* Очень высокий z-index, чтобы быть поверх всех элементов */
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#simbot:hover {
+  transform: scale(1.2);
+}
+
+.simbot-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.simbot-arm-left, .simbot-arm-right {
+  animation: wave 2s infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+
+/* Герой-секция */
+.hero {
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.hero .ai-emoji {
+  font-size: 1.8rem;
+  vertical-align: middle;
+}
+
+.hero .subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-button {
+  background: white;
+  color: var(--primary);
+  border: none;
+  padding: 15px 35px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(74, 108, 247, 0.4);
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+/* Услуги */
+.services-section {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.services-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--dark);
+}
+
+.section-desc {
+  text-align: center;
+  color: var(--gray);
+  margin-bottom: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  height: 320px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.service-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(74, 108, 247, 0.15);
+}
+
+.service-image {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image img {
+  transform: scale(1.05);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 15px 0;
+  color: var(--primary);
+}
+
+.service-card h3 {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: var(--dark);
+  padding: 0 20px;
+  flex-grow: 1;
+}
+
+.card-hover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--primary);
+  color: white;
+  padding: 15px 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  height: 100px;
+}
+
+.service-card:hover .card-hover {
+  transform: translateY(0);
+}
+
+.card-hover p {
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.timeline {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Процесс работы */
+.process-section {
+  padding: 80px 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.process-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 0;
+}
+
+.process-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.process-step {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.process-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.process-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(74, 108, 247, 0.1);
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin: 0 auto 15px;
+  font-size: 1.2rem;
+}
+
+.process-step h3 {
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+/* Форма заказа */
+.order-section {
+  padding: 80px 0;
+  background-color: var(--light);
+}
+
+.order-container {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.order-form {
+  flex: 1;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+}
+
+.price-display {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 10px 0;
+}
+
+.bonus-availability {
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 5px;
+  animation: pulse 2s infinite;
+}
+
+.progress-container {
+  margin-top: 15px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  width: 0%;
+  border-radius: 4px;
+}
+
+#progress-text {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.discount-info {
+  margin: 10px 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.final-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+}
+
+/* Подвал */
+.footer {
+  background-color: white;
+  padding: 50px 0 30px;
+  border-top: 1px solid #EDF2F7;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-logo h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.footer-logo p {
+  color: var(--gray);
+}
+
+.footer-contact, .footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #EDF2F7;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.secret-hint {
+  color: var(--light);
+  font-size: 1px;
+  user-select: none;
+  transition: color 0.3s, font-size 0.3s;
+}
+
+.secret-hint:hover {
+  color: var(--secondary);
+  font-size: 12px;
+}
+
+/* Секретный бонус */
+.secret-bonus {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  z-index: 10000; /* Выше всех элементов */
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  animation: popup 0.4s ease;
+  border: 1px solid #eee;
+  font-family: 'Inter', sans-serif;
+  display: none;
+}
+
+@keyframes popup {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.bonus-header h3 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.bonus-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.bonus-items {
+  display: flex;
+  gap: 20px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+}
+
+.bonus-item {
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #F8F9FF;
+  transition: all 0.3s ease;
+}
+
+.bonus-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(74, 108, 247, 0.1);
+}
+
+.partner-bonus {
+  background: linear-gradient(135deg, #4A6CF708, #8C52FF08);
+  border: 1px solid #4A6CF720;
+}
+
+.bonus-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.code-badge {
+  background: #4A6CF710;
+  color: var(--primary);
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.bonus-footer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activate-bonus {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.activate-bonus:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+}
+
+.close-secret-bonus {
+  background: transparent;
+  color: var(--dark);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.close-secret-bonus:hover {
+  background: #f0f0f0;
+}
+
+.bonus-note {
+  color: #888;
+  font-size: 12px;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* Контактный робот */
+.contact-robot {
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  z-index: 99998; /* Ниже основного робота, но выше других элементов */
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  display: none;
+  animation: robotAppear 0.4s ease;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+@keyframes robotAppear {
+  from { 
+    opacity: 0; 
+    transform: scale(0.8) translateY(20px);
+    bottom: 60px;
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0);
+    bottom: 80px;
+  }
+}
+
+.robot-container {
+  display: flex;
+  padding: 15px;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.contact-robot-svg {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.contact-robot-arm-left, .contact-robot-arm-right {
+  animation: wave 2s infinite;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-info h4 {
+  margin-bottom: 10px;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+.contact-method i {
+  width: 20px;
+  text-align: center;
+  color: var(--primary);
+}
+
+.contact-method a {
+  color: var(--dark);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-method a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.close-contact-robot {
+  background: #F8F9FF;
+  color: var(--dark);
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.close-contact-robot:hover {
+  background: #EDF2F7;
+}
+
+/* Правила бонуса */
+.bonus-rules-section {
+  padding: 80px 0;
+  background-color: white;
+  display: none;
+}
+
+.bonus-rules-section.active {
+  display: block;
+}
+
+.rules-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.rule-card {
+  background: #F8F9FF;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.rule-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(74, 108, 247, 0.1);
+}
+
+.rule-number {
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin: 0 auto 20px;
+  font-size: 1.4rem;
+}
+
+.partner-bonuses {
+  margin-top: 50px;
+}
+
+.partner-bonuses h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--dark);
+}
+
+.partner-bonus-item {
+  background: #F8F9FF;
+  border-left: 3px solid var(--primary);
+  padding: 15px;
+  border-radius: 0 8px 8px 0;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.partner-bonus-item .bonus-icon {
+  font-size: 2rem;
+  min-width: 40px;
+}
+
+.partner-bonuses h4 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.rules-footer {
+  text-align: center;
+  padding-top: 30px;
+  color: var(--gray);
+  font-style: italic;
+}
+
+/* Плавающие кнопки связи */
+.floating-contact {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99997; /* Ниже контакного робота */
+}
+
+.contact-toggle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+  transition: all 0.3s ease;
+}
+
+.contact-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Анимации появления при скролле */
+.service-card, .process-step {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.service-card.visible, .process-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero .subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .services-grid, .process-steps, .rules-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .order-container {
+    flex-direction: column;
+  }
+  
+  .bonus-items {
+    flex-direction: column;
+  }
+  
+  .contact-robot {
+    bottom: 30px;
+    right: 30px;
+    width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .contact-robot {
+    width: 90%;
+    right: 5%;
+  }
+  
+  .secret-bonus {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .service-card, .process-step {
+    margin-bottom: 20px;
+  }
+}
